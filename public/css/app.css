@@ -1,6 +1,21 @@
 @import url(https://fonts.googleapis.com/css2?family=Barlow&family=PT+Sans&family=Quicksand:wght@500;700&display=swap);@charset "UTF-8";
-* {
-  font-family: "Quicksand", sans-serif;
+.container h1,
+.create h1 {
+  font-size: 28px;
+  margin: 40px 0 30px;
+}
+
+.create h1,
+.container h1,
+.container h4 {
+  font-weight: 700;
+}
+
+.navbar-brand img {
+  width: 130px;
+  height: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 /*!
@@ -10022,4 +10037,138 @@ h3 {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+* {
+  font-family: "Quicksand", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+a i {
+  font-size: 18px;
+}
+a i:not(:last-of-type) {
+  margin-right: 25px;
+}
+a:hover {
+  text-decoration: none;
+}
+
+.delete-form {
+  display: inline-block;
+}
+.delete-form button {
+  color: #e3342f;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+}
+.delete-form button:focus {
+  outline: none;
+}
+.delete-form button:hover {
+  color: rgb(193, 20, 20);
+}
+
+.fa-plus {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #38c172;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 20px;
+  height: 30px;
+  width: 30px;
+  border-color: transparent !important;
+  box-shadow: none;
+  transition: all 0.3s;
+}
+.fa-plus:hover {
+  text-decoration: none;
+  background-color: #27864f;
+  color: #fff;
+}
+
+.table iframe {
+  width: 250px;
+}
+.table .th-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.table tr .td-actions {
+  margin: auto;
+  padding: 0;
+}
+.table a {
+  border-color: transparent;
+  padding: 8px;
+}
+.table a i {
+  font-size: 20px;
+}
+
+.index header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.index header a {
+  flex-shrink: 0;
+}
+.index .all-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3em;
+}
+.index .all-videos section {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.index .all-videos section p {
+  line-height: 120%;
+  margin: 0;
+  font-size: 18px;
+  max-width: 300px;
+}
+.index .pagination {
+  margin-top: 40px;
+}
+
+.show main {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(40%, 1fr));
+}
+.show h4 {
+  margin: 0;
+}
+.show .btn-success {
+  margin-top: 20px;
+}
+
+.create {
+  max-width: 800px;
+  margin: 0 auto;
+}
+@media (max-width: 850px) {
+  .create {
+    width: 90%;
+  }
+}
+.create button {
+  background-color: transparent;
+  border: none;
 }

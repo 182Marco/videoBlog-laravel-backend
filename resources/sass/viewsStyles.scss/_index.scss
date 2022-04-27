@@ -1,0 +1,51 @@
+.index {
+    header {
+        @include flex(row, space-between);
+        a {
+            flex-shrink: 0;
+        }
+    }
+    .all-videos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3em;
+        section {
+            margin: 0;
+            @include flex(column, flex-start, flex-start);
+            p {
+                line-height: 120%;
+                margin: 0;
+                font-size: 18px;
+                max-width: 300px;
+            }
+        }
+    }
+    .pagination {
+        margin-top: 40px;
+    }
+}
+
+.show {
+    main {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(40%, 1fr));
+    }
+    h4 {
+        margin: 0;
+    }
+    .btn-success {
+        margin-top: 20px;
+    }
+}
+
+.create {
+    max-width: 800px;
+    margin: 0 auto;
+    @media (max-width: 850px) {
+        width: 90%;
+    }
+    button {
+        background-color: transparent;
+        border: none;
+    }
+}

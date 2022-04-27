@@ -15,18 +15,23 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
 Route::get('/', function () {
     return redirect(config('app.frontend_url'));
 });
 
 // all auth routes -> to remove registration 4 others ['register' => false]
-Auth::routes(['register' => false]);
+Auth::routes();
 
 Route::prefix('admin')
       ->namespace('Admin')
       ->middleware('auth')
-      ->name('admin.')
+      // ->name('admin.')
       ->group(function () {
-        Route::resource('/', 'VideoController');
+        Route::get('/', 'VideoController@index')->name('home');
+        Route::get('/show/{slug}', 'VideoController@show')->name('show');
+        Route::get('/edit/{slug}', 'VideoController@edit')->name('edit');
+        Route::patch('/update/{id}', 'VideoController@update')->name('update');
+        Route::get('/create', 'VideoController@create')->name('create');
+        Route::post('/store', 'VideoController@store')->name('store');
+        Route::delete('/delete/{id}', 'VideoController@destroy')->name('delete');
       });

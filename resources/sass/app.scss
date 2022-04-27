@@ -2,9 +2,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow&family=PT+Sans&family=Quicksand:wght@500;700&display=swap");
 
 // Variables
-@import "variables";
-// globals
-@import "./globals";
+@import "vars";
+
+@import "./typography";
+@import "./mixins";
+@import "./navbar";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+
+@import "./globals";
+@import "./table";
+
+@import "./viewsStyles";

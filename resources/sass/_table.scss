@@ -1,0 +1,20 @@
+.table {
+    iframe {
+        width: 250px;
+        // height: 300px;
+    }
+    .th-actions {
+        @include flex();
+    }
+    tr .td-actions {
+        margin: auto;
+        padding: 0;
+    }
+    a {
+        border-color: transparent;
+        padding: 8px;
+        i {
+            font-size: 20px;
+        }
+    }
+}

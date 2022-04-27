@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Video;
+use Illuminate\Support\Str;
 
 class VideoController extends Controller
 {
@@ -15,7 +16,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::all();
+        $videos = Video::orderBy('created_at', 'desc')->paginate(6);
         return view('admin.index', compact('videos'));
     }
 
@@ -26,7 +27,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**
@@ -37,7 +38,14 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        
+        $new_video = new Video;
+        $new_video->fill($data);
+        $new_video->slug = Str::slug( $new_video->title, '-');
+        $new_video->save();
+
+        return redirect()->route('show', $new_video->slug);
     }
 
     /**
@@ -46,9 +54,14 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $video = Video::where('slug', $slug)->first();
+
+        if(!$video){
+            return abort(404);
+        }
+        return view('admin.show', compact('video'));
     }
 
     /**
@@ -57,9 +70,14 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $video = Video::where('slug', $slug)->first();
+
+        if(!$video){
+            return abort(404);
+        }
+        return view('admin.edit', compact('video'));
     }
 
     /**
@@ -71,7 +89,15 @@ class VideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        
+        $video = Video::find($id);
+        
+        $video['slug'] = Str::slug($video->slug, '-');
+        
+        $video->update($data);
+        
+        return redirect()->route('show', $video->slug);
     }
 
     /**
@@ -82,6 +108,11 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $video = Video::find($id);
+
+        $video->delete();
+
+        return redirect()->route('home')->with('deleted', $video->title);
+
     }
 }

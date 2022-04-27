@@ -1,3 +1,55 @@
 * {
     font-family: "Quicksand", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+a {
+    i {
+        font-size: 18px;
+        &:not(:last-of-type) {
+            margin-right: 25px;
+        }
+    }
+    &:hover {
+        text-decoration: none;
+    }
+}
+.delete-form {
+    display: inline-block;
+    button {
+        color: $danger;
+        background-color: transparent;
+        border: none;
+        font-size: 18px;
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            color: rgb(193, 20, 20);
+        }
+    }
+}
+
+.fa-plus {
+    @include flex();
+    background-color: $success;
+    color: $white;
+    border-radius: 50%;
+    font-size: 20px;
+    height: 30px;
+    width: 30px;
+    border-color: transparent !important;
+    box-shadow: none;
+    transition: all 0.3s;
+    &:hover {
+        text-decoration: none;
+        background-color: #27864f;
+        color: $white;
+    }
 }
