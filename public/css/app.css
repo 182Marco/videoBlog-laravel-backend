@@ -10126,6 +10126,9 @@ a:hover {
 .index header a {
   flex-shrink: 0;
 }
+.index h1 {
+  margin-top: 0;
+}
 .index .all-videos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -10144,8 +10147,15 @@ a:hover {
   font-size: 18px;
   max-width: 300px;
 }
+.index .alert-box {
+  height: 50px;
+  margin-bottom: 10px;
+}
 .index .pagination {
   margin-top: 40px;
+}
+.index .alert.alert-success {
+  margin: 0;
 }
 
 .show main {

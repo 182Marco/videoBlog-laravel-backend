@@ -34,4 +34,7 @@ Route::prefix('admin')
         Route::get('/create', 'VideoController@create')->name('create');
         Route::post('/store', 'VideoController@store')->name('store');
         Route::delete('/delete/{id}', 'VideoController@destroy')->name('delete');
+        Route::get('/contacts', 'ContactController@index')->name('contacts');
+        Route::get('/contact/{id}', 'ContactController@show')->name('contact');
+        Route::get('/contact/delete/{id}', 'ContactController@destroy')->name('deleteContact');
       });

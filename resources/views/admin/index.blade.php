@@ -2,12 +2,14 @@
 @section('content')
 <div class="container index">
         {{-- Session Deleted --}}
-        @if (session('deleted'))
-        <div class="alert alert-success">
-            <strong>{{ session('deleted') }}</strong>
-            {{ session('deleted') }} deleted!
+        <div class="alert-box">
+            @if (session('deleted'))
+            <div class="alert alert-success">
+                <strong>{{ session('deleted') }}</strong>
+                {{ session('deleted') }} cancellato!
+            </div>
+            @endif
         </div>
-        @endif
         {{--  --}}
     <header>
       <h1>Video in Data Base</h1>
