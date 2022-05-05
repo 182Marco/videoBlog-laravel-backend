@@ -9,7 +9,13 @@
         @endif
     </div>
     {{-- --}}
-    <h1>Contatti ricevuti</h1>
+    <header class="d-flex jiustfy-content-between align-items-center mb-4">
+        <h1 class="mb-0">Contatti ricevuti</h1>
+        <form action="" class="form-inline" type="GET" action={{route('contacts')}}>
+            <input class="form-control" type="text" name="search" placeholder="search by product id">
+            <button class="btn btn-success ml-2" type="text">search</button>
+        </form>
+    </header>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -38,7 +44,7 @@
                         </a>
                     </td>
                     <td>
-                        <section class="mb-3">
+                        <section>
                             <form
                                 class="delete-form"
                                 action="{{ route('deleteContact', $contact->id)}}"
@@ -60,6 +66,6 @@
         </table>
     </div>
 
-    {{ $contacts->links() }}
+    {{ $contacts->withQueryString()->links() }}
 </div>
 @endsection

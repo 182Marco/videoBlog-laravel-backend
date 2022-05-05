@@ -8,9 +8,19 @@ use App\Contact;
 
 class ContactController extends Controller
 {
-    public function index() {
-       
-        $contacts = Contact::orderBy('created_at', 'desc')->paginate(5);
+    public function index(Request $request) {
+
+        $search = $request->input('search');
+
+        if(!$search){
+            $contacts = Contact::orderBy('created_at', 'desc')->paginate(5);
+        }else{
+            $contacts = Contact::orderBy('created_at', 'desc')
+                            ->where('name', 'like','%'. $search. '%')  
+                            ->orwhere('email', 'like','%'. $search. '%')  
+                            ->orwhere('msg', 'like', '%'. $search. '%') 
+                            ->paginate(5);
+        }
         return view('admin.contacts.index', compact('contacts'));
     }
 

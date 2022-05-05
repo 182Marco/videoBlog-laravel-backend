@@ -22,7 +22,7 @@
 {{-- Footer --}}
 @slot('footer')
 @component('mail::footer')
-© {{ date('Y') }} Mirko Fasoli director @lang('All rights reserved.')
+© {{ date('Y') }} Mirko Fasoli director. @lang('All rights reserved.')
 @endcomponent
 @endslot
 @endcomponent
