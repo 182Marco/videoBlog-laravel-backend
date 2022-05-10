@@ -14,9 +14,18 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $videos = Video::orderBy('created_at', 'desc')->paginate(6);
+        $search = $request->input('search');
+        if(!$search){
+            $videos = Video::orderBy('created_at', 'desc')->paginate(6);
+        }else{
+            $videos = Video::orderBy('created_at', 'desc')
+                        ->where('title', 'like' , '%'. $search. '%')
+                        ->orWhere('credits', 'like' , '%'. $search. '%')
+                        ->paginate(6);      
+        }
+        
         return view('admin.index', compact('videos'));
     }
 

@@ -12,13 +12,17 @@
         </div>
         {{--  --}}
     <header>
-      <h1>Video in Data Base</h1>
+      <h1 class="mb-3">Video in Data Base</h1>
       <a href="{{ route('create')}}">
         <span class="add-new">
             <i class="fa-solid fa-plus"></i>
         </span>
       </a>
     </header>
+    <form  class="form-inline mb-3"  action="{{route('home')}}" method="GET">
+        <input type="text" name="search" class="form-control" placeholder="cerca un video">
+        <button type="submit" class="btn btn-primary ml-3">Cerca</button>
+    </form>
     <div class="all-videos">
         @forEach($videos as $video)
         <div class="video-box">
@@ -45,6 +49,7 @@
         </div>
         @endforEach
     </div>
-    {{ $videos->links() }}
+    
+    {{ $videos->withQueryString()->links() }}
 </div>
 @endsection

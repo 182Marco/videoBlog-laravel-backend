@@ -1,5 +1,6 @@
-@extends('layouts.app') @section('content')
-<div class="container index">
+@extends('layouts.app')
+@section('content')
+<div class="container index contact">
     {{-- Session Deleted --}}
     <div class="alert-box">
         @if (session('deleted'))
@@ -9,7 +10,7 @@
         @endif
     </div>
     {{-- --}}
-    <header class="d-flex jiustfy-content-between align-items-center mb-4">
+    <header class="mb-4">
         <h1 class="mb-0">Contatti ricevuti</h1>
         <form action="" class="form-inline" type="GET" action={{route('contacts')}}>
             <input class="form-control" type="text" name="search" placeholder="search by product id">
