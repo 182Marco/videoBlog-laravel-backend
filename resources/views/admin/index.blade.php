@@ -19,9 +19,9 @@
         </span>
       </a>
     </header>
-    <form  class="form-inline mb-3"  action="{{route('home')}}" method="GET">
-        <input type="text" name="search" class="form-control" placeholder="cerca un video">
-        <button type="submit" class="btn btn-primary ml-3">Cerca</button>
+    <form  class="form-inline"  action="{{route('home')}}" method="GET">
+        <input type="text" name="search" class="form-control mb-3 mr-3" placeholder="cerca un video">
+        <button type="submit" class="btn btn-primary mb-3">Cerca</button>
     </form>
     <div class="mt-5">
       @if (!$search)
@@ -31,11 +31,11 @@
         @forelse ($category->videos as $video)
             <div class="video-box">
               <div class="frame-box">
-                <iframe src="{{$video->url}}" frameborder="0"></iframe>
+                <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
               </div>
               <section>
                   <p>
-                    {{ $video->title }}
+                    {{ $video->title }} <em>({{$video->aspect_ratio}})</em>
                   </p>
                   <footer>
                   <a class="text-success" href="{{ route('show', $video->slug)}}">
@@ -62,12 +62,12 @@
     </div>
 
     @if(!$search)
-    <h3>Uncategorized</h3>
+    @forEach($videos as $video)@if (!$video->category_id)<h3>Uncategorized</h3>@endif @break @endforEach
     <div class="videos">
     @forEach($videos as $video)
       @if(!$video->category)
         <div class="video-box">
-          <iframe src="{{$video->url}}" frameborder="0"></iframe>
+          <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
           <section>
               <p>
                 {{ $video->title }}
@@ -98,7 +98,7 @@
     <div class="videos">
     @forEach($videos as $video)
       <div class="video-box">
-        <iframe src="{{$video->url}}" frameborder="0"></iframe>
+        <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
         <section>
             <p>
               {{ $video->title }}

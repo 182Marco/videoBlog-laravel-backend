@@ -54,6 +54,23 @@
                 <div class="feedback text-danger">{{$message}}</div>
             @enderror
         </div>
+        <div class="mb-3">
+            <label for="credits" class="form-label">Aspect ratio</label>
+            <select 
+               name="aspect_ratio" 
+               id="aspect_ratio_id" 
+               class="form-control @error('aspect_ratio') is-invalid @enderror"
+            >
+                @forEach($aspect_ratio_formats as $format)
+                 <option 
+                    value="{{$format}}"
+                    @if($format == old('aspect_ratio'))selected @endif
+                >
+                  {{$format}}
+                </option>
+                @endforEach
+            </select>
+        </div>   
         <button type="submit">
             <span class="add-new">
                 <i class="fa-solid fa-plus"></i>

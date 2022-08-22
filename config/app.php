@@ -2,6 +2,14 @@
 
 return [
 
+    'aspect_ratio_formats' => ['16:9','9:16','4:5'],
+
+    'validation_messagges' => [
+        'required' => 'The :attribute is required',
+        'unique' => 'The :attribute is already in use for another video',
+        'min' => 'Min :min characters allowed for this :attribute',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

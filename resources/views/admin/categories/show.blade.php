@@ -23,7 +23,7 @@
    @forelse ($category->videos as $video)
         <div class="video-box">
             <div class="videoframe">
-              <iframe src="{{$video->url}}" frameborder="0"></iframe>
+              <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
             </div>
             <section>
                 <p>

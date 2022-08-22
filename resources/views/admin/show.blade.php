@@ -3,7 +3,7 @@
   <div class="container show">
     <h1>{{ $video->title }}</h1>
     <main>
-      <iframe src="{{ $video->url}}" frameborder="0"></iframe>
+      <iframe src="{{ $video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
       <div>
         <h4>Credits:</h4>
         <p class="mb-4">{!! $video->credits !!}</p>
@@ -11,6 +11,8 @@
           <h4>Categoria:</h4>
           <p class="mb-4">{{$video->category->name}}</p>
         @endif
+        <h4>Aspect ratio:</h4>
+        <p class="mb-4">{{$video->aspect_ratio}}</p>
         <h4>Inserito a data base:</h4>
         <p class="mb-4">{{ $video->created_at }}</p>
         <h4>Ultima modifica a data base:</h4>

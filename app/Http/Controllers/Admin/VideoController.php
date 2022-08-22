@@ -41,7 +41,10 @@ class VideoController extends Controller
     public function create()
     {
         $categories = Category::orderBy('name')->get();
-        return view('admin.create', compact('categories'));
+
+        $aspect_ratio_formats = config('app.aspect_ratio_formats');
+
+        return view('admin.create', compact('categories', 'aspect_ratio_formats'));
     }
 
     /**
@@ -57,11 +60,8 @@ class VideoController extends Controller
             'url' => 'required|unique:videos|min:5',
             'category_id' => 'nullable|exists:categories,id',
         ],
-        [
-            'required' => 'The :attribute is required',
-            'unique' => 'The :attribute is already in use for another video',
-            'min' => 'Min :min characters allowed for this :attribute',
-        ]);
+            config('app.validation_messagges')
+        );
 
         $data = $request->all();
         
@@ -103,7 +103,10 @@ class VideoController extends Controller
         if(!$video){
             return abort(404);
         }
-        return view('admin.edit', compact('video','categories'));
+
+        $aspect_ratio_formats = config('app.aspect_ratio_formats');
+        
+        return view('admin.edit', compact('video', 'categories', 'aspect_ratio_formats'));
     }
 
     /**
@@ -128,11 +131,8 @@ class VideoController extends Controller
             ],
             'category_id' => 'nullable|exists:categories,id',
         ],
-        [
-            'required' => 'The :attribute is required',
-            'unique' => 'The :attribute is already in use for another video',
-            'min' => 'Min :min characters allowed for this :attribute',
-        ]);
+            config('app.validation_messagges')
+        );
 
         $data = $request->all();
         
