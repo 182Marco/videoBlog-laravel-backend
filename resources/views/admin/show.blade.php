@@ -7,6 +7,10 @@
       <div>
         <h4>Credits:</h4>
         <p class="mb-4">{!! $video->credits !!}</p>
+        @if($video->category)
+          <h4>Categoria:</h4>
+          <p class="mb-4">{{$video->category->name}}</p>
+        @endif
         <h4>Inserito a data base:</h4>
         <p class="mb-4">{{ $video->created_at }}</p>
         <h4>Ultima modifica a data base:</h4>

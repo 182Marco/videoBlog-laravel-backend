@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Video;
 use Illuminate\Support\Str;
+use App\Category;
+use Illuminate\Validation\Rule;
 
 class VideoController extends Controller
 {
@@ -17,16 +19,18 @@ class VideoController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $categories = Category::orderBy('name')->get();
         if(!$search){
-            $videos = Video::orderBy('created_at', 'desc')->paginate(6);
+            $videos = Video::orderBy('created_at', 'desc')->with('category')->get();
         }else{
             $videos = Video::orderBy('created_at', 'desc')
                         ->where('title', 'like' , '%'. $search. '%')
                         ->orWhere('credits', 'like' , '%'. $search. '%')
-                        ->paginate(6);      
+                        ->with('category')
+                        ->get();      
         }
         
-        return view('admin.index', compact('videos'));
+        return view('admin.index', compact('videos','categories','search'));
     }
 
     /**
@@ -36,7 +40,8 @@ class VideoController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        $categories = Category::orderBy('name')->get();
+        return view('admin.create', compact('categories'));
     }
 
     /**
@@ -46,7 +51,18 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $request->validate([
+            'title' => 'required|unique:videos|min:3',
+            'url' => 'required|unique:videos|min:5',
+            'category_id' => 'nullable|exists:categories,id',
+        ],
+        [
+            'required' => 'The :attribute is required',
+            'unique' => 'The :attribute is already in use for another video',
+            'min' => 'Min :min characters allowed for this :attribute',
+        ]);
+
         $data = $request->all();
         
         $new_video = new Video;
@@ -65,7 +81,7 @@ class VideoController extends Controller
      */
     public function show($slug)
     {
-        $video = Video::where('slug', $slug)->first();
+        $video = Video::where('slug', $slug)->with('category')->first();
 
         if(!$video){
             return abort(404);
@@ -81,12 +97,13 @@ class VideoController extends Controller
      */
     public function edit($slug)
     {
-        $video = Video::where('slug', $slug)->first();
+        $video = Video::where('slug', $slug)->with('category')->first();
+        $categories = Category::all();
 
         if(!$video){
             return abort(404);
         }
-        return view('admin.edit', compact('video'));
+        return view('admin.edit', compact('video','categories'));
     }
 
     /**
@@ -98,6 +115,25 @@ class VideoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => [
+                'required',
+                Rule::unique('videos')->ignore($id),
+                'min:3'
+            ],
+            'url' => [
+                'required',
+                Rule::unique('videos')->ignore($id),
+                'min:5'
+            ],
+            'category_id' => 'nullable|exists:categories,id',
+        ],
+        [
+            'required' => 'The :attribute is required',
+            'unique' => 'The :attribute is already in use for another video',
+            'min' => 'Min :min characters allowed for this :attribute',
+        ]);
+
         $data = $request->all();
         
         $video = Video::find($id);

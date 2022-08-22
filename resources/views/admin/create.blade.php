@@ -6,16 +6,53 @@
         @csrf
         @method('POST')
         <div class="mb-3">
-            <label for="url" class="form-label">url</label>
-            <input type="text" id="url" class="form-control" name="url">
+            <label for="url" class="form-label">Url</label>
+            <input 
+               type="text" 
+               id="url" 
+               name="url"
+               class="form-control @error('url') is-invalid @enderror" 
+               value="{{old('url')}}"
+            >
+            @error('url')
+              <div class="feedback text-danger">{{$message}}</div>
+            @enderror
         </div>
         <div class="mb-3">
-            <label for="title" class="form-label">titolo</label>
-            <input type="text" id="title" class="form-control" name="title">
+            <label for="title" class="form-label">Titolo</label>
+            <input 
+               type="text" 
+               id="title" 
+               name="title"
+               value="{{old('title')}}"
+               class="form-control @error('title') is-invalid @enderror" 
+            >
+            @error('title')
+              <div class="feedback text-danger">{{$message}}</div>
+            @enderror
         </div>
         <div class="mb-3">
-            <label for="credits" class="form-label">credits</label>
-            <textarea type="text" id="credits" class="form-control" name="credits" rows="6"></textarea>
+            <label for="credits" class="form-label">Credits</label>
+            <textarea type="text" id="credits" class="form-control" name="credits" rows="6">{{old('credits')}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="credits" class="form-label">Category</label>
+            <select 
+               name="category_id" 
+               id="category_id" 
+               class="form-control @error('category_id') is-invalid @enderror"
+            >
+                <option value="">-- Select Category --</option>
+                @forEach($categories as $category)
+                 <option 
+                    value="{{$category->id}}"
+                    @if($category->id == old($category->id)) selected @endif
+                >{{$category->name}}</option>
+                @endforEach
+            </select>
+            @error('category_id')
+                <div class="feedback text-danger">{{$message}}</div>
+            @enderror
         </div>
         <button type="submit">
             <span class="add-new">

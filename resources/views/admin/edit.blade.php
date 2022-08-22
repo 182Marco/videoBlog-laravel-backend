@@ -10,27 +10,41 @@
         @csrf 
         @method('PATCH')
         <div class="mb-3">
-            <label for="url" class="form-label">url</label>
+            <label for="url" class="form-label">Url</label>
             <input
                 type="text"
                 id="url"
-                class="form-control"
+                class="form-control @error('url') is-invalid @enderror"
                 name="url"
-                value="{{$video->url}}"
+                @if(old('url')) 
+                  value="{{old('url')}}" 
+                @else 
+                  value="{{$video->url}}"
+                @endif             
             />
+            @error('url')
+              <div class="feedback text-danger">{{$message}}</div>
+            @enderror
         </div>
         <div class="mb-3">
-            <label for="title" class="form-label">titolo</label>
+            <label for="title" class="form-label">Titolo</label>
             <input
                 type="text"
                 id="title"
-                class="form-control"
+                class="form-control @error('title') is-invalid @enderror"
                 name="title"
-                value="{{$video->title}}"
+                @if(old('title')) 
+                  value="{{old('title')}}" 
+                @else 
+                  value="{{$video->title}}"
+                @endif             
             />
+            @error('title')
+              <div class="feedback text-danger">{{$message}}</div>
+            @enderror
         </div>
         <div class="mb-3">
-            <label for="credits" class="form-label">credits</label>
+            <label for="credits" class="form-label">Credits</label>
             <textarea
                 type="text"
                 id="credits"
@@ -40,6 +54,22 @@
             >{{$video->credits}}
             </textarea>
         </div>
+        <div class="mb-3">
+            <label for="credits" class="form-label">Category</label>
+            <select 
+               name="category_id" 
+               id="category_id" 
+               class="form-control @error('category_id') is-invalid @enderror"
+            >
+                <option value="">-- Select Category --</option>
+                @forEach($categories as $category)
+                 <option 
+                    value="{{$category->id}}"
+                    @if($category->id == old('category_id', $video->category_id))selected @endif
+                >{{$category->name}}</option>
+                @endforEach
+            </select>
+        </div>    
         <button type="submit">
             <span class="btn btn-success">
                 salva

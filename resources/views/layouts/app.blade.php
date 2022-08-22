@@ -86,14 +86,21 @@
                                 <a
                                     class="nav-link @if(Route::currentRouteName() == 'home') active @endif"
                                     href="{{ route('home') }}"
-                                    >Tutti i video</a
+                                    >Videos</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link @if(Route::currentRouteName() == 'categories') active @endif"
+                                    href="{{ route('categories') }}"
+                                    >Categories</a
                                 >
                             </li>
                             <li class="nav-item">
                                 <a
                                     class="nav-link @if(Route::currentRouteName() == 'contacts') active @endif"
                                     href="{{ route('contacts') }}"
-                                    >Contatti ricevuti</a
+                                    >Recived contacts</a
                                 >
                             </li>
                             <li class="nav-item dropdown">

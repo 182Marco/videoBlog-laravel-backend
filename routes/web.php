@@ -37,4 +37,11 @@ Route::prefix('admin')
         Route::get('/contacts', 'ContactController@index')->name('contacts');
         Route::get('/contact/{id}', 'ContactController@show')->name('contact');
         Route::get('/contact/delete/{id}', 'ContactController@destroy')->name('deleteContact');
+        Route::get('/categories', 'CategoryController@index')->name('categories');
+        Route::get('/categories/show/{slug}', 'CategoryController@show')->name('showCategory');
+        Route::get('/categories/edit/{slug}', 'CategoryController@edit')->name('editCategory');
+        Route::patch('/categories/update/{id}', 'CategoryController@update')->name('updateCategory');
+        Route::get('/categories/create', 'CategoryController@create')->name('createCategory');
+        Route::post('/categories/store', 'CategoryController@store')->name('storeCategory');
+        Route::delete('/categories/delete/{id}', 'CategoryController@destroy')->name('deleteCategory');
       });
