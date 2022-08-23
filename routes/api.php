@@ -23,6 +23,10 @@ Route::namespace('Api')->group(function(){
 
     Route::get('/getVideos/{search?}', 'VideoController@getVideos');
 
+    Route::get('/getVideosByCategory/{slug}', 'VideoController@getVideosByCategory');
+
     Route::post('/contacts', 'ContactController@store');
+
+    Route::get('/getCategories', 'CategoryController@getCategories');
 
 });
