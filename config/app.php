@@ -2,7 +2,7 @@
 
 return [
 
-    'aspect_ratio_formats' => ['16:9','9:16','4:5'],
+    'aspect_ratio_formats' => ['16:9','9:16','4:5','1:1'],
 
     'validation_messagges' => [
         'required' => 'The :attribute is required',
