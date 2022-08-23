@@ -8,7 +8,7 @@
         <h4>Ultima modifica a data base:</h4>
         <p class="mb-4">{{ $category->updated_at }}</p>
    </main>
-    <section class="mb-3">
+    <section class="btns-box">
       <a class="text-primary mr-3" href="{{route('editCategory', $category->slug)}}">
         <i class="fa-solid fa-pencil"></i>
       </a>
@@ -18,16 +18,22 @@
         <button type="submit" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
       </form>
    </section>
-   <h4 class="mb-3">Videos</h4>
+   <h4 class="mb-3">Related videos</h4>
    <div class="videos">
    @forelse ($category->videos as $video)
-        <div class="video-box">
-            <div class="videoframe">
-              <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            <div class="video-box">
+              <div 
+              class="frame-box 
+              {{$video->aspect_ratio == "1:1" ? 'square' : null}}
+              {{$video->aspect_ratio == "9:16" ? 'vertical' : null}}
+              {{$video->aspect_ratio == "4:5" ? 'vertical-short' : null}}
+              "
+              >
+                <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <section>
+            <div class="video-texts">
                 <p>
-                {{ $video->title }}
+                {{ $video->title }}({{$video->aspect_ratio}})
                 </p>
                 <footer>
                 <a class="text-success" href="{{ route('show', $video->slug)}}">
@@ -43,7 +49,7 @@
                     <button type="submit" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </form>
                 </footer>      
-            </section>
+              </div>
         </div>
     @empty
     <p>No videos for this category</p>         

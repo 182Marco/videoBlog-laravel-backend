@@ -3,10 +3,18 @@
   <div class="container show">
     <h1>{{ $video->title }}</h1>
     <main>
-      <iframe src="{{ $video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-      <div>
+      <div 
+      class="frame-box 
+      {{$video->aspect_ratio == "1:1" ? 'square' : null}}
+      {{$video->aspect_ratio == "9:16" ? 'vertical' : null}}
+      {{$video->aspect_ratio == "4:5" ? 'vertical-short' : null}}
+      "
+      >
+        <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="ml-3">
         <h4>Credits:</h4>
-        <p class="mb-4">{!! $video->credits !!}</p>
+        <p class="mb-4">@if($video->credits){!! $video->credits !!}@else <em>You've not recorded "credits" for this video</em>@endif</p>
         @if($video->category)
           <h4>Categoria:</h4>
           <p class="mb-4">{{$video->category->name}}</p>

@@ -105,6 +105,27 @@ class VideoTableSeeder extends Seeder
                 "category_id" => "2",
                 "aspect_ratio" => "16:9",
             ],
+            [
+                "title" => "Geox NEW COLLECTION",
+                "url" => "https://player.vimeo.com/video/742158324?h=54e17b31fd",
+                "credits" => "",
+                "category_id" => "2",
+                "aspect_ratio" => "16:9",
+            ],
+            [
+                "title" => "GEOX New Collection - casa sull’albero",
+                "url" => "https://player.vimeo.com/video/742159403?h=068255b17d",
+                "credits" => "",
+                "category_id" => "2",
+                "aspect_ratio" => "16:9",
+            ],
+            [
+                "title" => "GEOX Back To School",
+                "url" => "https://player.vimeo.com/video/742167109?h=a587e90b1f",
+                "credits" => "",
+                "category_id" => "2",
+                "aspect_ratio" => "16:9",
+            ],
         ];
 
         foreach($videos as $video){

@@ -26,18 +26,25 @@
     <div class="mt-5">
       @if (!$search)
       @forEach($categories as $category)
-      <h3>{{$category->name}}</h3>
-      <div class="videos">
-        @forelse ($category->videos as $video)
+      <section>
+        <h3>{{$category->name}}</h3>
+        <div class="videos">
+          @forelse ($category->videos as $video)
             <div class="video-box">
-              <div class="frame-box">
+              <div 
+              class="frame-box 
+              {{$video->aspect_ratio == "1:1" ? 'square' : null}}
+              {{$video->aspect_ratio == "9:16" ? 'vertical' : null}}
+              {{$video->aspect_ratio == "4:5" ? 'vertical-short' : null}}
+              "
+              >
                 <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
               </div>
-              <section>
-                  <p>
-                    {{ $video->title }} <em>({{$video->aspect_ratio}})</em>
-                  </p>
-                  <footer>
+              <div class="video-texts">
+                <p>
+                  {{ $video->title }} <em>({{$video->aspect_ratio}})</em>
+                </p>
+                <footer>
                   <a class="text-success" href="{{ route('show', $video->slug)}}">
                       <i class="fa-solid fa-eye"></i>
                   </a>
@@ -50,13 +57,14 @@
                       @method('DELETE')
                       <button type="submit" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
                   </form>
-                  </footer>      
-              </section>
+                </footer>      
+              </div>
             </div>
-          @empty
-          <p>No videos for this category</p>         
+            @empty
+            <p>No videos for this category</p>         
           @endforelse
-      </div>
+        </div>
+      </section>
       @endforEach  
       @endif
     </div>
@@ -67,8 +75,16 @@
     @forEach($videos as $video)
       @if(!$video->category)
         <div class="video-box">
-          <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-          <section>
+          <div 
+          class="frame-box 
+          {{$video->aspect_ratio == "1:1" ? 'square' : null}}
+          {{$video->aspect_ratio == "9:16" ? 'vertical' : null}}
+          {{$video->aspect_ratio == "4:5" ? 'vertical-short' : null}}
+          "
+          >
+            <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="video-texts">
               <p>
                 {{ $video->title }}
               </p>
@@ -86,7 +102,7 @@
                   <button type="submit" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
               </form>
               </footer>      
-          </section>
+            </div>
         </div>     
       @endif
     @endforEach
@@ -96,10 +112,18 @@
     @if($search)
       <h3 class="mt-5">Searched Videos:</h3>
     <div class="videos">
-    @forEach($videos as $video)
+    @forelse($videos as $video)
       <div class="video-box">
-        <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-        <section>
+        <div 
+        class="frame-box 
+        {{$video->aspect_ratio == "1:1" ? 'square' : null}}
+        {{$video->aspect_ratio == "9:16" ? 'vertical' : null}}
+        {{$video->aspect_ratio == "4:5" ? 'vertical-short' : null}}
+        "
+        >
+          <iframe src="{{$video->url}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-texts">
             <p>
               {{ $video->title }}
             </p>
@@ -118,9 +142,11 @@
                 <button type="submit" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </form>
             </footer>      
-        </section>
+          </div>
       </div>     
-    @endforEach
+    @empty
+      <p>No results for this search</p>
+    @endforelse
   </div>   
   @endif  
 </div>
