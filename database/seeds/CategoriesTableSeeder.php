@@ -13,14 +13,31 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories = [ 'Social Content', 'Campaign', 'Documentary/interviews', 'Fashion Film' ];
+        $categories = [ 
+            [
+               "name" => "Social Content",
+               "id"  => "1",
+            ],
+            [
+               "name" => "Campaign",
+               "id"  => "2",
+            ],
+            [
+               "name" => "Documentary/interviews",
+               "id"  => "3",
+            ],
+            [
+               "name" => "Fashion Film",
+               "id"  => "4",
+            ],
+        ];
 
         foreach($categories as $category){
             // instance
             $new_category = new Category();
             // populate
-            $new_category->name = $category;
-            $new_category->slug = Str::slug($category, '-');
+            $new_category->name = $category['name'];
+            $new_category->slug = Str::slug($category['name'], '-');
             // save
             $new_category->save();
         } 
