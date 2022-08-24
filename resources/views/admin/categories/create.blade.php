@@ -2,7 +2,7 @@
 @section('content')
   <div class="create">
     <h1>Create a new category record in data base</h1>
-    <form action="{{ route('storeCategory')}}" method="POST">
+    <form action="{{ route('storeCategory')}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="mb-3">
@@ -17,6 +17,11 @@
             @error('name')
               <div class="feedback text-danger">{{$message}}</div>
             @enderror
+        </div>
+        <div class="mb-3">
+          <label for="img" class="form-label">Category Image</label><br>
+          <input type="file" name="img" >
+          @error('img')<div class="feedback text-danger">{{$message}}</div>@enderror
         </div>
         <button type="submit">
             <span class="add-new">

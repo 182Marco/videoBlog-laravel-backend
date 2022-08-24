@@ -6,7 +6,11 @@
             <i class="fa-solid fa-eye"></i>
         </a>
     </h1>
-    <form action="{{ route('updateCategory', $category->id)}}" method="POST">
+    <form 
+      action="{{ route('updateCategory', $category->id)}}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
         @csrf 
         @method('PATCH')
         <div class="mb-3">
@@ -25,6 +29,14 @@
             @error('name')
               <div class="feedback text-danger">{{$message}}</div>
             @enderror
+        </div>
+        <div class="mb-5">
+            <label for="img" class="form-label">Category Image</label><br>
+            @if ($category->img)
+                <img width="200" class="mr-2" src="{{asset('/storage/' . $category->img)}}" alt="{{$category->name}}">
+            @endif
+            <input type="file" name="img" >
+            @error('img')<div class="feedback text-danger">{{$message}}</div>@enderror
         </div>
         <button type="submit">
             <span class="btn btn-success">

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -27,17 +28,18 @@ class CategoryController extends Controller
     {   
         $request->validate([
             'name' => 'required|unique:categories|min:2',
+            'img' => 'image'
         ],
-        [
-            'required' => 'The :attribute is required',
-            'unique' => 'The :attribute is already in use for another video',
-            'min' => 'Min :min characters allowed for this :attribute',
-        ]);
+          config('app.validation_messagges')
+        );
 
         $data = $request->all();
+
+        $img_path = Storage::put('categories-images', $data['img']);
         
         $new_category = new Category;
         $new_category->fill($data);
+        $new_category->img = $img_path;
         $new_category->slug = Str::slug( $new_category->name, '-');
         $new_category->save();
 
@@ -70,21 +72,28 @@ class CategoryController extends Controller
             'name' => [
                 'required',
                 Rule::unique('categories')->ignore($id),
-                'min:2'
+                'min:2',
             ],
+            'img' => 'image'
         ],
-        [
-            'required' => 'The :attribute is required',
-            'unique' => 'The :attribute is already in use for another video',
-            'min' => 'Min :min characters allowed for this :attribute',
-        ]);
+          config('app.validation_messagges')
+        );
 
         $data = $request->all();
         
         $category = Category::find($id);
+
+        if(array_key_exists('img', $data)) {
+            // delete previus
+            if($category->img){
+               Storage::delete($category->img);
+            }
+            // set new
+            $img_path = Storage::put('categories-images', $data['img']);
+        }
         
         $category['slug'] = Str::slug($category->slug, '-');
-        
+        $category['img'] = $img_path;
         $category->update($data);
         
         return redirect()->route('showCategory', $category->slug);
@@ -93,6 +102,10 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+
+        if($category->img) {
+            Storage::delete($category->img);
+        }
 
         $category->delete();
 

@@ -2,12 +2,21 @@
 @section('content')
   <div class="container show category">
     <h1>{{ $category->name }}</h1>
-    <main>
-        <h4>Inserito a data base:</h4>
-        <p class="mb-4">{{ $category->created_at }}</p>
-        <h4>Ultima modifica a data base:</h4>
-        <p class="mb-4">{{ $category->updated_at }}</p>
-   </main>
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <img class="w-100 mb-4" src="{{asset('/storage/' . $category->img)}}" alt="{{$category->name}}">
+      </div>
+      <div class="col-lg-6 col-sm-12">
+       <main>
+          <h4>Nome nei links:</h4>
+          <p class="mb-5">{{ $category->slug}}</p>
+          <h4>Inserito a data base:</h4>
+          <p class="mb-5">{{ $category->created_at }}</p>
+          <h4>Ultima modifica a data base:</h4>
+          <p class="mb-5">{{ $category->updated_at }}</p>
+        </main>
+      </div>
+  </div>
     <section class="btns-box">
       <a class="text-primary mr-3" href="{{route('editCategory', $category->slug)}}">
         <i class="fa-solid fa-pencil"></i>

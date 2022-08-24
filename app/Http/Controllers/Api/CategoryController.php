@@ -9,7 +9,16 @@ class CategoryController extends Controller
 {
     public function  getCategories() {
         
-        $category = Category::orderBy('name')->get();
-        return response()->json($category);
+        $categories = Category::orderBy('name')->get();
+
+        foreach($categories as $category) {
+            if($category->img) {
+                $category->img = url('storage/' . $category->img);
+            }
+
+        }
+
+
+        return response()->json($categories);
     }
 }
