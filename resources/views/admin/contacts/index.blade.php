@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container index contact">
+<div class="container contact">
     {{-- Session Deleted --}}
     <div class="alert-box">
         @if (session('deleted'))
