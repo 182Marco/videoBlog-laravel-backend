@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CategoriesTableSeeder::class,
-            VideoTableSeeder::class
+            VideoTableSeeder::class,
+            BiographiesTableSeeder::class,
+            PhoneNumbersTableSeeder::class
         ]);
     }
 }

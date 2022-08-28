@@ -84,6 +84,20 @@
                             @endif @else
                             <li class="nav-item">
                                 <a
+                                    class="nav-link @if(Route::currentRouteName() == 'bio') active @endif"
+                                    href="{{ route('bio') }}"
+                                    >Bio</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link @if(Route::currentRouteName() == 'phone') active @endif"
+                                    href="{{ route('phone') }}"
+                                    >My phone</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
                                     class="nav-link @if(Route::currentRouteName() == 'home') active @endif"
                                     href="{{ route('home') }}"
                                     >Videos</a

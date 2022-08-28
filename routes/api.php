@@ -22,11 +22,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function(){
 
     Route::get('/getVideos/{search?}', 'VideoController@getVideos');
-
     Route::get('/getVideosByCategory/{slug}', 'VideoController@getVideosByCategory');
-
     Route::post('/contacts', 'ContactController@store');
-
     Route::get('/getCategories', 'CategoryController@getCategories');
+    Route::get('/phoneNumber', 'phoneNumberController@getPhone');
+    Route::get('/getBiographies', 'BiographyController@getBiographies');
 
 });

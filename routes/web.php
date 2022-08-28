@@ -44,4 +44,10 @@ Route::prefix('admin')
         Route::get('/categories/create', 'CategoryController@create')->name('createCategory');
         Route::post('/categories/store', 'CategoryController@store')->name('storeCategory');
         Route::delete('/categories/delete/{id}', 'CategoryController@destroy')->name('deleteCategory');
+        Route::get('/phone', 'PhoneNumberController@index')->name('phone');
+        Route::get('/phone/edit', 'PhoneNumberController@edit')->name('editPhone');
+        Route::patch('/phone/update', 'PhoneNumberController@update')->name('updatePhone');
+        Route::get('/biography', 'BiographyController@index')->name('bio');
+        Route::get('/biography/edit', 'BiographyController@edit')->name('editBio');
+        Route::patch('/biography/update', 'BiographyController@update')->name('updateBio');
       });

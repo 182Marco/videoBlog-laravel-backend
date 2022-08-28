@@ -17,18 +17,22 @@ class CategoriesTableSeeder extends Seeder
             [
                "name" => "Social Content",
                "id"  => "1",
+               "img"  => "defaultValue",
             ],
             [
                "name" => "Campaign",
                "id"  => "2",
+               "img"  => "defaultValue",
             ],
             [
                "name" => "Documentary/interviews",
                "id"  => "3",
+               "img"  => "defaultValue",
             ],
             [
                "name" => "Fashion Film",
                "id"  => "4",
+               "img"  => "defaultValue",
             ],
         ];
 
@@ -38,6 +42,7 @@ class CategoriesTableSeeder extends Seeder
             // populate
             $new_category->name = $category['name'];
             $new_category->slug = Str::slug($category['name'], '-');
+            $new_category->img =  $category['img'];
             // save
             $new_category->save();
         } 
