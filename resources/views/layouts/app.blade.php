@@ -41,7 +41,7 @@
                         href="{{ url('/') }}"
                     >
                         <img
-                            src="https://i.vimeocdn.com/portrait/9154044_360x360.webp"
+                            src="{{ asset('mrk-black.png') }}"
                             alt="personal branding logo"
                         />
                     </a>
