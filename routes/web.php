@@ -19,8 +19,9 @@ Route::get('/', function () {
     return redirect(config('app.frontend_url'));
 });
 
-// all auth routes -> to remove registration 4 others ['register' => false]
-Auth::routes();
+// all auth routes -> to remove registration 4 others pass in ['register' => false]
+//  (otherwise pass nothing)
+Auth::routes(['register' => false]);
 
 Route::prefix('admin')
       ->namespace('Admin')
