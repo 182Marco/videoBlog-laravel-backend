@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 // all auth routes -> to remove registration 4 others pass in ['register' => false]
 //  (otherwise pass nothing)
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::prefix('admin')
       ->namespace('Admin')
