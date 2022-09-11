@@ -19,7 +19,7 @@ class VideoController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::orderBy('id')->get();
         if(!$search){
             $videos = Video::orderBy('created_at', 'desc')->with('category')->get();
         }else{

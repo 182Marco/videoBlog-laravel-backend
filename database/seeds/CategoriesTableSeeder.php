@@ -15,22 +15,22 @@ class CategoriesTableSeeder extends Seeder
     {
         $categories = [ 
             [
-               "name" => "Social Content",
+               "name" => "Campaign",
                "id"  => "1",
                "img"  => "defaultValue",
             ],
             [
-               "name" => "Campaign",
+               "name" => "Social Content",
                "id"  => "2",
                "img"  => "defaultValue",
             ],
             [
-               "name" => "Documentary/interviews",
+               "name" => "Fashion Film",
                "id"  => "3",
                "img"  => "defaultValue",
             ],
             [
-               "name" => "Fashion Film",
+               "name" => "Documentary/interviews",
                "id"  => "4",
                "img"  => "defaultValue",
             ],

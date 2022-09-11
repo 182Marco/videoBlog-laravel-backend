@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function  getCategories() {
         
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::orderBy('id')->get();
 
         foreach($categories as $category) {
             if($category->img) {
