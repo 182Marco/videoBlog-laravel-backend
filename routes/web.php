@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 // actually auto imported -> but not getting undfined er in Auth -> problem of VScode
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,10 @@ Route::get('/', function () {
 // all auth routes -> to remove registration 4 others pass in ['register' => false]
 //  (otherwise pass nothing)
 Auth::routes(['register' => false]);
+
+Route::get('/linkstorage', function () {
+  Artisan::call('storage:link');
+});
 
 Route::prefix('admin')
       ->namespace('Admin')
